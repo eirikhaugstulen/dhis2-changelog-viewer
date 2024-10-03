@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { Dhis2ChangelogViewer } from '@/components/changelog-viewer'
+import { Analytics } from "@vercel/analytics/react"
 import { Suspense } from 'react'
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export default function Home() {
       <Suspense fallback={<div>Loading...</div>}>
         <Dhis2ChangelogViewer />
       </Suspense>
+      <Analytics />
     </main>
   )
 }
