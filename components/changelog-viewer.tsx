@@ -24,6 +24,9 @@ function ChangelogViewer() {
       const data = await response.json()
       return Array.isArray(data) ? data.map((repo) => repo.name) : []
     },
+    staleTime: Infinity,
+    gcTime: Infinity,
+    refetchOnWindowFocus: false,
   })
 
   const changelogQuery = useQuery({
@@ -49,6 +52,9 @@ function ChangelogViewer() {
       }
     },
     enabled: !!selectedRepo,
+    refetchOnWindowFocus: false,
+    gcTime: Infinity,
+    staleTime: Infinity,
   })
 
   const filteredReleases = changelogQuery.data?.releases.filter((release) => {
