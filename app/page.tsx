@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-4 sm:p-6 md:p-12 lg:p-24">
       <Suspense fallback={<div>Loading...</div>}>
         <Dhis2ChangelogViewer />
       </Suspense>
