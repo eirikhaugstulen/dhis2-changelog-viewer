@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { Dhis2ChangelogViewer } from '@/components/changelog-viewer'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'DHIS2 Changelog Viewer',
@@ -9,7 +10,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Dhis2ChangelogViewer />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Dhis2ChangelogViewer />
+      </Suspense>
     </main>
   )
 }
