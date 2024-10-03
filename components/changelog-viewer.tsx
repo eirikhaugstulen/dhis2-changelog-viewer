@@ -20,8 +20,9 @@ function ChangelogViewer() {
   const reposQuery = useQuery({
     queryKey: ['repos'],
     queryFn: async () => {
-      const response = await fetchGitHubAPI('https://api.github.com/orgs/dhis2/repos?per_page=100')
+      const response = await fetchGitHubAPI('https://api.github.com/orgs/dhis2/repos?per_page=100&page=1&sort=updated')
       const data = await response.json()
+      console.log(data)
       return Array.isArray(data) ? data.map((repo) => repo.name) : []
     },
     staleTime: Infinity,
