@@ -62,6 +62,7 @@ export function ChangelogDisplay({
         onFromVersionChange={setFromVersion}
         onToVersionChange={setToVersion}
         versions={versions}
+        releases={changelogQuery.data.releases} // Add this line
       />
 
       <div className="grid gap-8">

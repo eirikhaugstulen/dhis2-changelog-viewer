@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -5,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Filter, Check, ChevronsUpDown } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { SummaryDialog } from './summary-dialog'
 
 interface VersionSelectorProps {
   fromVersion: string
@@ -12,6 +14,7 @@ interface VersionSelectorProps {
   onFromVersionChange: (value: string) => void
   onToVersionChange: (value: string) => void
   versions: string[]
+  releases: any[] // Add this line
 }
 
 export function VersionSelector({
@@ -19,10 +22,12 @@ export function VersionSelector({
   toVersion,
   onFromVersionChange,
   onToVersionChange,
-  versions
+  versions,
+  releases // Add this line
 }: VersionSelectorProps) {
   const [fromOpen, setFromOpen] = useState(false)
   const [toOpen, setToOpen] = useState(false)
+  const [isSummaryDialogOpen, setIsSummaryDialogOpen] = useState(false)
 
   const sortedVersions = useMemo(() => {
     return [...versions].sort((a, b) => b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' }))
@@ -43,7 +48,7 @@ export function VersionSelector({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 mb-4">
           <div className="flex-1">
             <label htmlFor="fromVersion" className="block text-sm font-medium text-gray-700 mb-1">
               From Version
@@ -139,7 +144,22 @@ export function VersionSelector({
             </Popover>
           </div>
         </div>
+        <div className="flex justify-end">
+          <Button
+            disabled={!fromVersion || !toVersion}
+            onClick={() => setIsSummaryDialogOpen(true)}
+          >
+            Generate summary
+          </Button>
+        </div>
       </CardContent>
+      <SummaryDialog
+        isOpen={isSummaryDialogOpen}
+        onClose={() => setIsSummaryDialogOpen(false)}
+        fromVersion={fromVersion}
+        toVersion={toVersion}
+        releases={releases} // Add this line
+      />
     </Card>
   )
 }
