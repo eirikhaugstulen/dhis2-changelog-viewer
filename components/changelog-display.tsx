@@ -78,29 +78,6 @@ export function ChangelogDisplay({
           </CardContent>
         </Card>
       )}
-
-      <div className="flex justify-center gap-4 mt-8">
-        {changelogQuery.data.pagination.prev && (
-          <Button
-            variant="outline"
-            onClick={() => {
-              // Implement pagination logic here
-            }}
-          >
-            Previous
-          </Button>
-        )}
-        {changelogQuery.data.pagination.next && (
-          <Button
-            variant="outline"
-            onClick={() => {
-              // Implement pagination logic here
-            }}
-          >
-            Next
-          </Button>
-        )}
-      </div>
     </div>
   )
 }
