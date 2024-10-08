@@ -50,6 +50,20 @@ export function ReleaseCard({ release }: { release: Release }) {
             <ReactMarkdown
               className="prose prose-sm max-w-none"
               remarkPlugins={[remarkGfm]}
+              components={{
+                p: ({ children }) => <p className="text-sm text-muted-foreground">{children}</p>,
+                h1: ({ children }) => <h1 className="text-xl font-bold">{children}</h1>,
+                h2: ({ children }) => <h2 className="text-lg font-bold">{children}</h2>,
+                h3: ({ children }) => <h3 className="text-lg font-bold my-4">{children}</h3>,
+                ul: ({ children }) => <ul className="list-disc list-inside mb-5">{children}</ul>,
+                ol: ({ children }) => <ol className="list-decimal list-inside">{children}</ol>,
+                li: ({ children }) => <li className="ml-4">{children}</li>,
+                a: ({ children, href }) => <a href={href} className="text-gray-600 hover:text-gray-700 hover:underline">{children}</a>,
+                code: ({ children }) => <code className="bg-gray-100 p-1 text-sm rounded-md">{children}</code>,
+                blockquote: ({ children }) => <blockquote className="border-l-2 text-sm border-gray-300 pl-4 py-1 my-1">{children}</blockquote>,
+                br: () => <br />,
+                hr: () => <hr className="my-5" />,
+              }}
             >
               {release.body}
             </ReactMarkdown>
